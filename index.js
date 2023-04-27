@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const testRouter = require("./Router/testRouter");
-const router = require("express").Router();
+const testRouter = require("./Router/testRouter")
+const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
 
@@ -14,19 +15,19 @@ app.use(
 
 app.use(bodyParser.json());
 app.use("/", testRouter)
-
-router.post("/mobile", (req, res) => {
-  console.log("number", req.body.number);
-  client.verify
-    .services(serviceSID)
-    .verifications.create({
-      to: `+91${req.body.number}`,
-      channel: "sms",
-    })
-    .then((resp) => {
-      console.log("response", resp);
-      res.status(200).json(resp);
-    });
+const configuration = new Configuration({
+  apiKey: process.env.CHATBOT_KEY,
+});
+const openai = new OpenAIApi(configuration);
+app.post("/chat", async (req, res) => {
+  console.log("openai response gets successfully")
+  const { prompt } = req.body;
+  const completion = await openai.createCompletion({
+    model: "text-davinci-003", 
+    prompt: prompt,
+    max_tokens: 500,
+  });
+  res.send(completion.data.choices[0].text);
 });
 
 const PORT = "8000";
