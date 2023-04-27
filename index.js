@@ -21,7 +21,7 @@ app.get("/",function(request,response){
 
 
 const configuration = new Configuration({
-  apiKey: process.env.CHATBOT_KEY,
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 app.post("/chat", async (req, res) => {
