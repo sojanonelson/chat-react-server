@@ -1,10 +1,10 @@
-
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const testRouter = require("./Router/testRouter")
 const { Configuration, OpenAIApi } = require("openai");
-let openapi= "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";
+
 const app = express();
 
 app.use(
@@ -15,8 +15,13 @@ app.use(
 
 app.use(bodyParser.json());
 app.use("/", testRouter)
+
+app.get("/",function(request,response){
+  response.send('SERVER');});
+
+
 const configuration = new Configuration({
-  apiKey: openapi,
+  apiKey: process.env.CHATBOT_KEY,
 });
 const openai = new OpenAIApi(configuration);
 app.post("/chat", async (req, res) => {
