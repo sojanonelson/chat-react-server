@@ -20,7 +20,8 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 app.post("/chat", async (req, res, next) => {
-
+  
+ try{
   console.log("openai response gets successfully")
   const { prompt } = req.body;
   const completion = await openai.createCompletion({
@@ -29,7 +30,12 @@ app.post("/chat", async (req, res, next) => {
     max_tokens: 500,
   })
   res.send(completion.data.choices[0].text);
+}catch (error) {
+       console.error(error)
+       process.exit(1)
+   }
 });
+}
 
 const PORT = "8000";
 app.listen(PORT, () => {
