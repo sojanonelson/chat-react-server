@@ -6,9 +6,7 @@ const testRouter = require("./Router/testRouter")
 const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
-app.use(cors({
-  origin:"http://localhost:3000",
-}))
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use("/", testRouter)
@@ -22,6 +20,9 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 app.post("/chat", async (req, res, next) => {
+   headers: {
+              'Content-Type': 'application/json',
+},
   console.log("openai response gets successfully")
   const { prompt } = req.body;
   const completion = await openai.createCompletion({
