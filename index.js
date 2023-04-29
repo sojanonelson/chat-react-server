@@ -6,8 +6,9 @@ const testRouter = require("./Router/testRouter")
 const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
-
-
+app.use(cors({
+  origin:"https://botserverin.onrender.com",
+))}
 
 app.use(bodyParser.json());
 app.use("/", testRouter)
