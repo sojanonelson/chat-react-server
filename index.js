@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use("/", testRouter)
 
 app.get("/",function(request,response){
-  response.send('SERVER');});
+  response.send('SERVER1');});
 
 
 const configuration = new Configuration({
