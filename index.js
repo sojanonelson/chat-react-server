@@ -29,7 +29,10 @@ app.post("/chat", async (req, res, next) => {
     max_tokens: 500,
   })
   res.send(completion.data.choices[0].text);
-});
+}).catch(function (response) {
+        //handle error
+        console.log(response);
+    });;
 
 const PORT = "8000";
 app.listen(PORT, () => {
