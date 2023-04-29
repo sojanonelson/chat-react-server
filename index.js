@@ -7,7 +7,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
 app.use(cors({
-  origin:"https://botserverin.onrender.com",
+  origin:"https://botserverin.onrender.com/chat",
 }))
 
 app.use(bodyParser.json());
