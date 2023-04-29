@@ -27,7 +27,7 @@ app.post("/chat", async (req, res) => {
     model: "text-davinci-003", 
     prompt: prompt,
     max_tokens: 500,
-  });
+  }).catch(error => { throw error});
   res.send(completion.data.choices[0].text);
 });
 
