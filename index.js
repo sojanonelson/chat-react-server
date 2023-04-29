@@ -20,10 +20,8 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 app.post("/chat", async (req, res, next) => {
-   headers: {
-              'Content-Type': 'application/json',
-},
-  console.log("openai response gets successfully")
+
+  console.log("openai response gets successfully"),
   const { prompt } = req.body;
   const completion = await openai.createCompletion({
     model: "text-davinci-003", 
