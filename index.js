@@ -18,24 +18,19 @@ app.get("/",function(request,response){
 const configuration = new Configuration({
   apiKey: "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",
 });
+
 const openai = new OpenAIApi(configuration);
-app.post("/chat", async (req, res, next) => {
-  
- try{
+app.post("/chat", async (req, res) => {
   console.log("openai response gets successfully")
   const { prompt } = req.body;
   const completion = await openai.createCompletion({
     model: "text-davinci-003", 
     prompt: prompt,
     max_tokens: 500,
-  })
+  });
   res.send(completion.data.choices[0].text);
-}catch (error) {
-       console.error(error)
-       process.exit(1)
-   }
 });
-}
+
 
 const PORT = "8000";
 app.listen(PORT, () => {
