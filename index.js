@@ -28,8 +28,9 @@ app.post("/chat", async (req, res) => {
     prompt: prompt,
     max_tokens: 500,
     
-    res.send(completion.data.choices[0].text);
+    
   });
+  res.send(completion.data.choices[0].text);
   
 });
 
